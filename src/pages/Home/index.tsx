@@ -1,5 +1,7 @@
+import Layout from "../../templates/Layout";
+
 const Home = () => {
-  return <div className="bg-purple-400">Homepage</div>;
+  return <Layout>Homepage</Layout>;
 };
 
 export default Home;

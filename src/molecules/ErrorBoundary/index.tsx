@@ -9,6 +9,7 @@ interface ErrorLayoutPropType {
   handleReset: () => void;
   handleErrorLog?: (error: any, info: any) => void;
 }
+
 const ErrorLayout = ({
   children,
   resetKeys,

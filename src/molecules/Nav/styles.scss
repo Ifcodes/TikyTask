@@ -1,0 +1,11 @@
+nav {
+  @apply w-full h-[4.5rem] flex justify-between items-center px-12 border border-solid border-gray-200;
+
+  .logo {
+    @apply font-inter text-[1.5rem] font-bold;
+  }
+
+  .cta-container {
+    @apply flex items-center gap-4;
+  }
+}

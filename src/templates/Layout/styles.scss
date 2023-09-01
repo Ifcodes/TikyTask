@@ -1,0 +1,7 @@
+.layout-wrapper {
+  @apply w-screen h-screen relative overflow-hidden;
+
+  main {
+    @apply w-full h-main px-12 mt-8;
+  }
+}
