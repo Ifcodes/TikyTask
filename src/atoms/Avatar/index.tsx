@@ -1,6 +1,6 @@
 import "./styles.scss";
 import clsx from "clsx";
-import defaultAvatar from "/public/images/Avatar.png";
+import defaultAvatar from "/images/Avatar.png";
 
 interface AvatarPropType {
   imgUrl?: string;

@@ -1,0 +1,8 @@
+.checkBox{
+  @apply w-6 h-6 rounded-lg border border-solid border-gray-300 flex justify-center items-center relative cursor-pointer;
+}
+
+.isChecked {
+  @extend .checkBox;
+  @apply border-primary-1;
+}

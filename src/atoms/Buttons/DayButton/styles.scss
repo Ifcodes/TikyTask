@@ -1,0 +1,8 @@
+.day-button {
+  @apply w-[3.8rem] h-[4.2rem] border border-solid border-gray-300 rounded-lg flex flex-col justify-center items-center hover:bg-slate-100 cursor-pointer gap-2 font-semibold text-[0.8rem] text-gray-700;
+}
+
+  .active {
+    @extend .day-button;
+    @apply bg-primary-1 text-white hover:bg-primary-1;
+  }

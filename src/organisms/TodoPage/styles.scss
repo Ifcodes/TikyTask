@@ -1,0 +1,33 @@
+.header {
+  @apply flex justify-between w-full;
+
+  .header-text {
+    h1 {
+      @apply text-[1.875rem] font-semibold;
+    }
+
+    p {
+      @apply mt-0 text-gray-600 text-base font-normal;
+    }
+  }
+}
+
+.content{
+  @apply grid grid-cols-custom mt-8 pb-8 ;
+
+  .todo-content{
+    @apply w-full px-4 border-r border-solid border-gray-200;
+
+    .group-card-cont{
+      @apply w-full overflow-x-auto;
+    }
+
+    .month-text{
+      @apply text-gray-900 font-semibold;
+    }
+
+    .task-content{
+      @apply w-full;
+    }
+  }
+}
