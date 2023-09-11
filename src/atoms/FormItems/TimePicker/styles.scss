@@ -1,0 +1,11 @@
+.time-picker-cont{
+  @apply flex items-center rounded-lg border border-solid border-gray-300 px-2 py-2;
+
+  input{
+    @apply ml-3 text-gray-500 text-[0.875rem] outline-none rounded-lg w-max;
+  }
+
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+}

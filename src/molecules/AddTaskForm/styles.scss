@@ -1,0 +1,22 @@
+.header{
+  @apply flex justify-between items-center mb-4;
+
+  h5{
+    @apply text-gray-900 text-lg font-semibold;
+  }
+}
+  .tags-cont{
+    @apply mt-2 flex justify-between items-center;
+  }
+
+  .reminder-cont{
+    @apply mt-4 flex items-center justify-between;
+
+    .reminder-text{
+      @apply flex items-center;
+    }
+  }
+
+  .selector{
+    @apply bg-white outline-none;
+  }

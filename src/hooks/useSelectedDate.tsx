@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import moment, { Moment } from "moment";
 import { useEffect, useState } from "react";
 
-const useSelectedDate = () => {
+const useSelectedDate: any = () => {
   const [firstElevenDays, setFirstElevenDays] = useState<Moment[]>([]);
   const [date, setDate] = useState<Moment>(moment());
 

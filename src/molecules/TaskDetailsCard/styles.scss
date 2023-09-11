@@ -1,0 +1,9 @@
+.date-cont{
+  @apply flex items-center gap-4;
+}
+.close-icon{
+  @apply ml-auto my-4 cursor-pointer;
+}
+.title-text{
+  @apply mb-8 font-bold text-lg text-gray-normal ;
+}

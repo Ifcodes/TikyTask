@@ -29,5 +29,10 @@
     .task-content{
       @apply w-full;
     }
+
   }
+
+   .todo-utils-cont{
+      @apply w-full flex flex-col items-end;
+    }
 }

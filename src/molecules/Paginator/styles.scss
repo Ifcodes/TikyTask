@@ -1,0 +1,7 @@
+.paginator-wrapper{
+  @apply w-full flex justify-between items-center mb-8;
+
+  .nav-btn{
+    @apply flex items-center gap-4 text-[0.875rem] font-semibold cursor-pointer;
+  }
+}

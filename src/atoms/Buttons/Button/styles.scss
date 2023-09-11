@@ -1,11 +1,16 @@
 .button {
   @apply w-full h-10 flex items-center justify-center border-none bg-primary-1 text-white transition-all rounded-lg hover:bg-primary-2 shadow-xs font-semibold;
 
-  & .outlined {
-    @apply bg-white hover:bg-slate-100 border border-solid border-gray-300;
-  }
-
   .suffix {
+    @apply ml-2;
+  }
+  .prefix {
     @apply mr-2;
+
   }
 }
+
+.outlined {
+    @extend .button;
+    @apply bg-white hover:bg-slate-100 border border-solid border-gray-300 text-gray-700;
+  }

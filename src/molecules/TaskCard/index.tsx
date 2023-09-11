@@ -11,6 +11,7 @@ interface TaskCardProps {
   date: Moment;
   startTime: string;
   endTime: string;
+  handleCardClick: () => void;
 }
 
 const TaskCard = ({
@@ -20,20 +21,21 @@ const TaskCard = ({
   endTime,
   date,
   handleChecked,
+  handleCardClick,
 }: TaskCardProps) => {
   const dateString = moment(date).fromNow();
   return (
-    <div className="task-card-container">
+    <div className="task-card-container" onClick={handleCardClick}>
       <div className="text-content-cont">
         <CheckBox checked={completed} onChange={handleChecked} />
         <div className="ml-3">
           <p
             className={clsx(
-              "font-medium text-dark",
+              "font-medium text-dark ",
               completed && " line-through"
             )}
           >
-            {title}
+            {`${title.charAt(0).toUpperCase()}${title.substring(1)}`}
           </p>
           <p className={clsx("text-gray-600", completed && "line-through")}>
             {startTime} - {endTime}
