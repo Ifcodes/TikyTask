@@ -12,8 +12,10 @@ interface ModalProps {
 }
 const Modal = ({ showModal, title, children, onClose }: ModalProps) => {
   const clickRef = useRef(null);
+  const width = window.innerWidth;
 
   useClickAway(clickRef, () => {
+    if (width >= 1024) return;
     onClose(false);
   });
 

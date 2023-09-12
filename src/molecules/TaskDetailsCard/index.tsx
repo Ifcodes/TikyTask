@@ -52,6 +52,11 @@ const TaskDetailsCard = ({
       }
     );
   };
+
+  const handleEdit = () => {
+    onClose(false);
+    onEdit();
+  };
   return (
     <BackgroundCard className={clsx(showCard ? "block" : "hidden")}>
       <CloseIcon className="close-icon" onClick={() => onClose(false)} />
@@ -72,7 +77,7 @@ const TaskDetailsCard = ({
         <Button loading={loading} outlined onClick={handleDelete}>
           Delete
         </Button>
-        <Button onClick={onEdit}>Edit</Button>
+        <Button onClick={handleEdit}>Edit</Button>
       </div>
       <ToastContainer hideProgressBar position="bottom-right" />
     </BackgroundCard>

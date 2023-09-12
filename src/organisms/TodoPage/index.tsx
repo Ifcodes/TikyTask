@@ -245,25 +245,29 @@ const TodoPage = () => {
         </div>
         <div className="todo-utils-cont">
           {selectedTask && showTaskDetails && (
-            <TaskDetailsCard
-              queryParams={queryParams}
-              showCard={showTaskDetails}
-              onClose={setShowTaskDetails}
-              setQueryParams={setQueryParams}
-              onEdit={() => {
-                setShowEditTaskDetails(true);
-                setShowTaskDetails(false);
-              }}
-              {...selectedTask}
-            />
+            <div className="utils-content">
+              <TaskDetailsCard
+                queryParams={queryParams}
+                showCard={showTaskDetails}
+                onClose={setShowTaskDetails}
+                setQueryParams={setQueryParams}
+                onEdit={() => {
+                  setShowEditTaskDetails(true);
+                  setShowTaskDetails(false);
+                }}
+                {...selectedTask}
+              />
+            </div>
           )}
           {showEditTaskDetails && (
-            <AddTaskForm
-              queryParams={queryParams}
-              setQueryParams={setQueryParams}
-              selectedTask={selectedTask}
-              onClose={() => setShowEditTaskDetails(false)}
-            />
+            <div className="utils-content">
+              <AddTaskForm
+                queryParams={queryParams}
+                setQueryParams={setQueryParams}
+                selectedTask={selectedTask}
+                onClose={() => setShowEditTaskDetails(false)}
+              />
+            </div>
           )}
           {!showEditTaskDetails && !showTaskDetails && (
             <Calendar selectedDate={date} handleChange={handleDateChange} />

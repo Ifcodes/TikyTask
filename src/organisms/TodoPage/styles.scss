@@ -33,7 +33,12 @@
   }
 
    .todo-utils-cont{
-      @apply w-full hidden lg:flex flex-col items-end;
+      @apply w-full hidden lg:flex flex-col items-end relative;
+
+      .utils-content{
+        @apply absolute top-0 right-0;
+        z-index: 1000;
+      }
     }
 
     .mobile-input{
