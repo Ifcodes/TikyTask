@@ -27,11 +27,13 @@ const TaskCard = ({
   return (
     <div className="task-card-container" onClick={handleCardClick}>
       <div className="text-content-cont">
-        <CheckBox checked={completed} onChange={handleChecked} />
+        <div className="w-8">
+          <CheckBox checked={completed} onChange={handleChecked} />
+        </div>
         <div className="ml-3">
           <p
             className={clsx(
-              "font-medium text-dark ",
+              "font-medium text-gray-900 ",
               completed && " line-through"
             )}
           >
@@ -42,7 +44,9 @@ const TaskCard = ({
           </p>
         </div>
       </div>
-      <span className="text-gray-600 text-[0.875rem]">{dateString}</span>
+      <span className="text-gray-600 text-[0.875rem] text-right">
+        {dateString}
+      </span>
     </div>
   );
 };

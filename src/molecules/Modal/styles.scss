@@ -1,0 +1,18 @@
+.modal-overlay {
+  @apply w-full fixed inset-0 h-screen bg-[#00000066] z-10;
+}
+
+.modal-box {
+  @apply z-20 bg-white w-full h-[40rem] p-6  rounded-tl-3xl rounded-tr-3xl fixed bottom-[-100vh];
+  transition: bottom 0.5s ease-in-out;
+  left: 50%;
+  transform: translateX(-50%);
+
+  button.close-btn {
+    @apply bg-transparent border-none p-0 absolute top-9 right-9;
+  }
+
+  &.open-modal {
+    bottom: 0;
+  }
+}

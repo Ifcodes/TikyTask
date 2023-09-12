@@ -1,5 +1,5 @@
 nav {
-  @apply w-full h-[4.5rem] flex justify-between items-center px-12 border border-solid border-gray-200;
+  @apply w-full h-[4.5rem] flex justify-between items-center px-4 lg:px-12 border border-solid border-gray-200;
 
   .logo-container {
     @apply flex items-center;
@@ -14,6 +14,6 @@ nav {
   }
 
   .cta-container {
-    @apply flex items-center gap-4;
+    @apply hidden lg:flex items-center gap-4;
   }
 }

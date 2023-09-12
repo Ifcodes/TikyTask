@@ -2,6 +2,6 @@
   @apply w-screen h-screen relative overflow-hidden;
 
   main {
-    @apply w-full h-main px-12 mt-8 overflow-auto;
+    @apply w-full h-main px-4 lg:px-12 mt-8 overflow-auto;
   }
 }

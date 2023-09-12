@@ -23,7 +23,7 @@ const Paginator = ({
         <ArrowLeftIcon />
         <span>Previous</span>
       </div>
-      <div>
+      <div className="hidden lg:block">
         <Pagination
           hideNextButton
           hidePrevButton
@@ -34,6 +34,9 @@ const Paginator = ({
           onChange={onChange}
         />
       </div>
+      <span className="font-semibold text-gray-600 lg:hidden">
+        {page}/{count}
+      </span>
       <div className="nav-btn" onClick={() => handleNavigation("next")}>
         <span>Next</span>
         <ArrowRightIcon />

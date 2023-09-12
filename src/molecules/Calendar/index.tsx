@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import BackgroundCard from "../../atoms/Cards/BackgroundCard";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -16,7 +15,10 @@ const Calendar = ({ selectedDate, handleChange }: CalendarProps) => {
   return (
     <BackgroundCard>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateCalendar value={dayjs(moment(selectedDate).format("YYYY-MM-DD"))} onChange={handleChange} />
+        <DateCalendar
+          value={dayjs(moment(selectedDate).format("YYYY-MM-DD"))}
+          onChange={handleChange}
+        />
       </LocalizationProvider>
     </BackgroundCard>
   );

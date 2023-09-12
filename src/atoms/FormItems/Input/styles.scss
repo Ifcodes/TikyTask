@@ -1,0 +1,7 @@
+.input-wrapper{
+  @apply w-full h-12 border border-solid border-gray-300 bg-gray-50 shadow-xs flex items-center p-4 rounded-lg;
+
+  input{
+    @apply flex-grow mr-4 bg-transparent border-none outline-none font-[0.875rem];
+  }
+}

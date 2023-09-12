@@ -13,10 +13,10 @@
 }
 
 .content{
-  @apply grid grid-cols-custom mt-8 pb-8 ;
+  @apply lg:grid lg:grid-cols-custom mt-8 pb-8 ;
 
   .todo-content{
-    @apply w-full px-4 border-r border-solid border-gray-200;
+    @apply w-full lg:px-4 lg:border-r border-solid border-gray-200;
 
     .group-card-cont{
       @apply w-full overflow-x-auto;
@@ -27,12 +27,16 @@
     }
 
     .task-content{
-      @apply w-full;
+      @apply w-full pb-16 lg:pb-4;
     }
 
   }
 
    .todo-utils-cont{
-      @apply w-full flex flex-col items-end;
+      @apply w-full hidden lg:flex flex-col items-end;
+    }
+
+    .mobile-input{
+      @apply lg:hidden w-full fixed bottom-4 z-0 left-0 px-4;
     }
 }

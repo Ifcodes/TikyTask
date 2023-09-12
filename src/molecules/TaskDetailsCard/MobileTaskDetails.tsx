@@ -1,28 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
-import { TaskType } from "../../utils/types";
-import BackgroundCard from "../../atoms/Cards/BackgroundCard";
-import CloseIcon from "../../atoms/vectors/closeIcon";
-import CalendarIcon from "../../atoms/vectors/calendar-icon";
-import ClockIcon from "../../atoms/vectors/clock-icon";
-import "./styles.scss";
-import Button from "../../atoms/Buttons/Button";
-import clsx from "clsx";
+import { TaskDetailsProps } from ".";
 import { deleteTask } from "../../services";
 import { ToastContainer, toast } from "react-toastify";
+import Modal from "../Modal";
+import CalendarIcon from "../../atoms/vectors/calendar-icon";
+import ClockIcon from "../../atoms/vectors/clock-icon";
+import Button from "../../atoms/Buttons/Button";
 
-export interface TaskDetailsProps extends TaskType {
-  startTime: string;
-  endTime: string;
-  date: string;
-  showCard: boolean;
-  onClose: (val: boolean) => void;
-  onEdit: () => void;
-  queryParams: any;
-  setQueryParams: (val: any) => void;
-}
-const TaskDetailsCard = ({
+const MobileTaskDetails = ({
   id,
   showCard,
   title,
@@ -53,8 +39,7 @@ const TaskDetailsCard = ({
     );
   };
   return (
-    <BackgroundCard className={clsx(showCard ? "block" : "hidden")}>
-      <CloseIcon className="close-icon" onClick={() => onClose(false)} />
+    <Modal showModal={showCard} onClose={onClose} title="">
       <p className="title-text">{`${title
         .charAt(0)
         .toUpperCase()}${title.substring(1)}`}</p>
@@ -75,8 +60,8 @@ const TaskDetailsCard = ({
         <Button onClick={onEdit}>Edit</Button>
       </div>
       <ToastContainer hideProgressBar position="bottom-right" />
-    </BackgroundCard>
+    </Modal>
   );
 };
 
-export default TaskDetailsCard;
+export default MobileTaskDetails;

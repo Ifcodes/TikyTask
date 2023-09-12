@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from "../../atoms/Buttons/Button";
 import PlusIcon from "../../atoms/vectors/plus-icon";
@@ -15,9 +16,13 @@ import TaskDetailsCard from "../../molecules/TaskDetailsCard";
 import AddTaskForm from "../../molecules/AddTaskForm";
 import Calendar from "../../molecules/Calendar";
 import dayjs from "dayjs";
-import { getTasks } from "../../services";
+import { getTasks, updateTask } from "../../services";
 import ErrorFallback from "../../molecules/ErrorFallBack";
 import { CircularProgress } from "@mui/material";
+import MobileModalAddForm from "../../molecules/AddTaskForm/mobileModal";
+import Input from "../../atoms/FormItems/Input";
+import RecorderIcon from "../../atoms/vectors/recorder-icon";
+import MobileTaskDetails from "../../molecules/TaskDetailsCard/MobileTaskDetails";
 
 export interface ExTaskType extends TaskType {
   startTime: string;
@@ -52,7 +57,6 @@ const TodoPage = () => {
 
     setAllTasks(groupedTasks);
     setTasks(groupedTasks[defaultIndx]);
-    console.log({ groupedTasks });
   };
 
   useEffect(() => {
@@ -82,17 +86,26 @@ const TodoPage = () => {
   }, [page]);
 
   const handleChange = (e: any, taskId: number) => {
-    setTasks((prev) =>
-      prev.map((task) => {
-        if (task.id === taskId) task.completed = e.target.checked;
+    updateTask(
+      taskId,
+      { completed: e.target.checked },
+      (_res) => {
+        setTasks((prev) =>
+          prev.map((task) => {
+            if (task.id === taskId) task.completed = e.target.checked;
 
-        return task;
-      })
+            return task;
+          })
+        );
+      },
+      (err) => {
+        console.log(err?.message);
+      }
     );
   };
 
   const handlePagination = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     value: number
   ) => {
     setCurrentPage(value);
@@ -101,7 +114,7 @@ const TodoPage = () => {
   };
 
   const handlePageNav = (type: string) => {
-    if (type === "next" && page && Number(page) < allTasks.length) {
+    if (type === "next" && currentPage < allTasks.length) {
       setCurrentPage(currentPage + 1);
       navigate(`/${currentPage + 1}`);
     }
@@ -131,7 +144,7 @@ const TodoPage = () => {
           <p>You got some task to do.</p>
         </div>
         <Button
-          className=" w-max px-4"
+          className=" hidden lg:flex w-max px-4"
           prefixIcon={<PlusIcon />}
           onClick={() => {
             setShowEditTaskDetails(true);
@@ -166,45 +179,69 @@ const TodoPage = () => {
                     <CircularProgress />
                   </div>
                 ) : tasks.length > 0 ? (
-                  tasks.map((task) => {
-                    const startTime = moment().format("hh:mm a");
-                    const endTime = moment().format("hh:mm a");
-                    const date = moment();
-                    return (
-                      <TaskCard
-                        key={`${task.id}`}
-                        date={date}
-                        startTime={startTime}
-                        endTime={endTime}
-                        handleChecked={(e) => handleChange(e, task.id)}
-                        handleCardClick={() =>
-                          handleTaskClick({
-                            ...task,
-                            startTime,
-                            endTime,
-                            date: date.format("Do MMMM, YYYY"),
-                          })
-                        }
-                        {...task}
+                  <>
+                    {tasks.map((task) => {
+                      const startTime = moment().format("hh:mm a");
+                      const endTime = moment().format("hh:mm a");
+                      const date = moment();
+                      return (
+                        <TaskCard
+                          key={`${task.id}`}
+                          date={date}
+                          startTime={startTime}
+                          endTime={endTime}
+                          handleChecked={(e) => handleChange(e, task.id)}
+                          handleCardClick={() =>
+                            handleTaskClick({
+                              ...task,
+                              startTime,
+                              endTime,
+                              date: date.format("Do MMMM, YYYY"),
+                            })
+                          }
+                          {...task}
+                        />
+                      );
+                    })}
+                    <div className="lg:hidden my-4">
+                      <Paginator
+                        defaultPage={Number(page) || 0}
+                        onChange={handlePagination}
+                        count={totalPages}
+                        page={Number(page) || 1}
+                        handleNavigation={handlePageNav}
                       />
-                    );
-                  })
+                    </div>
+                  </>
                 ) : (
                   <div className="h-40 flex items-center justify-center">
                     No data found
                   </div>
                 )}
               </div>
-              <hr className="w-full border border-solid border-gray-200 mt-8" />
-              <Paginator
-                defaultPage={Number(page) || 0}
-                onChange={handlePagination}
-                count={totalPages}
-                page={Number(page) || 1}
-                handleNavigation={handlePageNav}
-              />
+              <hr className="w-full border border-solid border-gray-200 mt-8 hidden lg:block" />
+              <div className="hidden lg:block">
+                <Paginator
+                  defaultPage={Number(page) || 0}
+                  onChange={handlePagination}
+                  count={totalPages}
+                  page={Number(page) || 1}
+                  handleNavigation={handlePageNav}
+                />
+              </div>
             </>
           )}
+        </div>
+        <div className="mobile-input">
+          <Input
+            placeholder="Input task"
+            readOnly
+            onClick={() => {
+              setShowEditTaskDetails(true);
+              setSelectedTask(null);
+            }}
+            icon={<RecorderIcon />}
+          />
         </div>
         <div className="todo-utils-cont">
           {selectedTask && showTaskDetails && (
@@ -232,6 +269,30 @@ const TodoPage = () => {
             <Calendar selectedDate={date} handleChange={handleDateChange} />
           )}
         </div>
+        <div className="lg:hidden">
+          <MobileModalAddForm
+            showModal={showEditTaskDetails}
+            queryParams={queryParams}
+            setQueryParams={setQueryParams}
+            selectedTask={selectedTask}
+            onClose={() => setShowEditTaskDetails(false)}
+          />
+        </div>
+        {selectedTask && showTaskDetails && (
+          <div className="lg:hidden">
+            <MobileTaskDetails
+              queryParams={queryParams}
+              showCard={showTaskDetails}
+              onClose={setShowTaskDetails}
+              setQueryParams={setQueryParams}
+              onEdit={() => {
+                setShowEditTaskDetails(true);
+                setShowTaskDetails(false);
+              }}
+              {...selectedTask}
+            />
+          </div>
+        )}
       </section>
     </>
   );

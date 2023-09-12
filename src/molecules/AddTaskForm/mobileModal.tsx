@@ -1,32 +1,29 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, useEffect, useState } from "react";
-import BackgroundCard from "../../atoms/Cards/BackgroundCard";
+import { AddTaskFormProp } from ".";
 import { ExTaskType } from "../../organisms/TodoPage";
 import moment from "moment";
-import CloseIcon from "../../atoms/vectors/closeIcon";
-import "./styles.scss";
+import { createTask, updateTask } from "../../services";
+import { ToastContainer, toast } from "react-toastify";
+import Modal from "../Modal";
 import TagButton from "../../atoms/Buttons/TagButton";
 import CalendarIcon from "../../atoms/vectors/calendar-icon";
 import TimePicker from "../../atoms/FormItems/TimePicker";
 import BellIconFilled from "../../atoms/vectors/bell-icon-filled";
+import CloseIcon from "../../atoms/vectors/closeIcon";
 import Button from "../../atoms/Buttons/Button";
-import { createTask, updateTask } from "../../services";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-export interface AddTaskFormProp {
-  queryParams: any;
-  setQueryParams: (val: any) => void;
-  selectedTask: ExTaskType | null;
-  onClose: (val: boolean) => void;
+interface MobileModalAddForm extends AddTaskFormProp {
+  showModal: boolean;
 }
-const AddTaskForm = ({
-  selectedTask,
+
+const MobileModalAddForm = ({
+  showModal,
   onClose,
-  setQueryParams,
   queryParams,
-}: AddTaskFormProp) => {
+  setQueryParams,
+  selectedTask,
+}: MobileModalAddForm) => {
   const [formData, setFormData] = useState<ExTaskType>({
     startTime: moment().format("hh:mm"),
     endTime: moment().format("hh:mm"),
@@ -112,14 +109,11 @@ const AddTaskForm = ({
   };
 
   return (
-    <BackgroundCard>
-      <div className="header">
-        <h5>{selectedTask ? "Edit" : "Add"} task</h5>
-        <CloseIcon
-          onClick={handleClose}
-          className="hover:bg-gray-200 cursor-pointer rounded-full transition-all"
-        />
-      </div>
+    <Modal
+      showModal={showModal}
+      onClose={handleClose}
+      title={`${selectedTask ? "Edit" : "Add"} task`}
+    >
       <textarea
         name="title"
         value={formData.title}
@@ -175,8 +169,8 @@ const AddTaskForm = ({
         </Button>
       </div>
       <ToastContainer hideProgressBar position="bottom-right" />
-    </BackgroundCard>
+    </Modal>
   );
 };
 
-export default AddTaskForm;
+export default MobileModalAddForm;
