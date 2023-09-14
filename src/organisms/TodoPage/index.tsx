@@ -203,7 +203,7 @@ const TodoPage = () => {
                         />
                       );
                     })}
-                    <div className="lg:hidden my-4">
+                    <div className="lg:hidden my-4 mb-12">
                       <Paginator
                         defaultPage={Number(page) || 0}
                         onChange={handlePagination}
