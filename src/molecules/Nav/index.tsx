@@ -9,7 +9,7 @@ const Nav = () => {
     <nav>
       <div className="logo-container">
         <img src="/images/TodoLogo.svg" className="logo" />
-        <h1 className="logo-text">ToDo</h1>
+        <h1 className="logo-text">TikyTask</h1>
       </div>
       <div className="cta-container ">
         <SettingsIcon />
