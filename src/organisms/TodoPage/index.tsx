@@ -233,15 +233,13 @@ const TodoPage = () => {
           )}
         </div>
         <div className="mobile-input">
-          <Input
-            placeholder="Input task"
-            readOnly
+          <PlusIcon
             onClick={() => {
               setShowEditTaskDetails(true);
               setSelectedTask(null);
             }}
-            icon={<RecorderIcon />}
           />
+          {/* <Input placeholder="Input task" readOnly icon={<RecorderIcon />} /> */}
         </div>
         <div className="todo-utils-cont">
           {selectedTask && showTaskDetails && (
@@ -262,6 +260,8 @@ const TodoPage = () => {
           {showEditTaskDetails && (
             <div className="utils-content">
               <AddTaskForm
+                todoList={tasks}
+                setTodoList={setTasks}
                 queryParams={queryParams}
                 setQueryParams={setQueryParams}
                 selectedTask={selectedTask}
@@ -275,6 +275,8 @@ const TodoPage = () => {
         </div>
         <div className="lg:hidden">
           <MobileModalAddForm
+            todoList={tasks}
+            setTodoList={setTasks}
             showModal={showEditTaskDetails}
             queryParams={queryParams}
             setQueryParams={setQueryParams}

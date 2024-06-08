@@ -14,18 +14,23 @@ import Button from "../../atoms/Buttons/Button";
 import { createTask, updateTask } from "../../services";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { TaskType } from "../../utils/types";
 
 export interface AddTaskFormProp {
   queryParams: any;
   setQueryParams: (val: any) => void;
   selectedTask: ExTaskType | null;
   onClose: (val: boolean) => void;
+  todoList: TaskType[];
+  setTodoList: (val: TaskType[]) => void;
 }
 const AddTaskForm = ({
   selectedTask,
   onClose,
   setQueryParams,
   queryParams,
+  setTodoList,
+  todoList,
 }: AddTaskFormProp) => {
   const [formData, setFormData] = useState<ExTaskType>({
     startTime: moment().format("hh:mm"),
@@ -75,10 +80,22 @@ const AddTaskForm = ({
       updateTask(
         selectedTask.id,
         formData,
-        (_res) => {
+        (res) => {
           setLoading(false);
           toast.success("Task updated successfully.");
           setQueryParams({ ...queryParams });
+          setTodoList(
+            todoList.map(task => {
+              if(task.id === res.id) {
+                return {
+                  ...task,
+                  ...res
+                }
+              }
+
+              return task;
+            })
+          )
         },
         (err) => {
           setLoading(false);
@@ -88,11 +105,11 @@ const AddTaskForm = ({
     } else {
       createTask(
         formData,
-        (_res) => {
+        (res) => {
           setLoading(false);
           toast.success("Created successfully.");
           setQueryParams({ ...queryParams });
-
+          setTodoList(todoList.concat(res))
           setFormData({
             startTime: moment().format("hh:mm"),
             endTime: moment().format("hh:mm"),
